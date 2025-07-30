@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Registration Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .dark-mode {
+      background-color: #121212;
+      color: #f5f5f5;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .dark-mode .container {
+      background-color: #1e1e1e;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .note {
+      font-size: 12px;
+      color: #555;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .toggle-dark {
+      float: right;
+      margin-top: -40px;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <button class="toggle-dark" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+
+  <div class="container">
+    <h2>Student Registration Form</h2>
+    <form id="registrationForm">
+      <label for="name">Student Name</label>
+      <input type="text" id="name" placeholder="Enter your name" required>
+
+      <label for="department">Department</label>
+      <input type="text" id="department" placeholder="Enter your department" required>
+
+      <label for="college">College Name</label>
+      <input type="text" id="college" placeholder="Enter your college name" required>
+
+      <label for="mobile">Mobile Number</label>
+      <input type="tel" id="mobile" placeholder="Enter your mobile number" pattern="[0-9]{10}" required>
+      <div class="note">Enter 10-digit number only.</div>
+
+      <label for="email">Email ID</label>
+      <input type="email" id="email" placeholder="Enter your email address" required>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    // Toggle dark mode
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+
+    // Form validation and save to localStorage
+    document.getElementById("registrationForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const department = document.getElementById("department").value.trim();
+      const college = document.getElementById("college").value.trim();
+      const mobile = document.getElementById("mobile").value.trim();
+      const email = document.getElementById("email").value.trim();
+
+      if (name === "" || department === "" || college === "" || mobile.length !== 10 || email === "") {
+        alert("Please fill out all fields correctly!");
+        return;
+      }
+
+      const data = {
+        name,
+        department,
+        college,
+        mobile,
+        email
+      };
+
+      localStorage.setItem("studentFormData", JSON.stringify(data));
+      alert("Form submitted and saved successfully!");
+      this.reset();
+    });
+  </script>
+
+</body>
+</html>
